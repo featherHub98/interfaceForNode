@@ -19,5 +19,16 @@ const isExpired = (token) => {
   return payload.exp * 1000 > Date.now();
 
 };
+const verifyToken = (token) => {
+  if (!token) return false;
+  if (isExpired(token)) {
+    let refreshToken = localStorage.getItem('refreshToken');
+    if (!refreshToken) return false;
+    if (!isExpired(refreshToken)) {
+      return axios.post('http://localhost:2000/realms/users/refresh',refreshToken)
+    }
+    // logout
+  };
+}
 
 export {getRealmSecret, isExpired};

@@ -1,6 +1,7 @@
 import './App.css';
 import { useState,useEffect } from 'react';
 import { getRealmSecret, isExpired } from './Service';
+import Login from './components/login/Login.tsx';
 
 function App() {
   const [realmSecret,setRealmSecret] = useState('')
@@ -17,7 +18,7 @@ function App() {
       <input type="text" onChange={(e) => setCurrentToken(e.target.value)} placeholder="Enter JWT Token" />
       <button onClick={() => isExpired(currentToken)}>Verify Token</button>
       {realmSecret}
-      
+      <Login />
     </div>
   );
 }
